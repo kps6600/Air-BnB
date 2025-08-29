@@ -1,6 +1,12 @@
 
 
-
+.container{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
 
 body{
     font-family: "Plush Jakarta Sans", sans-serif;
@@ -25,6 +31,10 @@ body{
 }
 
 /* Footer */
+footer {
+  margin-bottom: 0 !important;
+}
+
 
 
 .f-info-links a{
@@ -57,11 +67,12 @@ body{
     flex-wrap: wrap;
     background-color:#ebebeb;
     text-align: center;
-    align-items: space-evenly; 
+    align-items: space-evenly;
+    flex: 1; 
 }
 
 /* cards */
-.card{
+.listing-card{
     border: none;
     margin-bottom: 2rem;
 }
@@ -75,4 +86,10 @@ body{
  
 .index-description{
     text-decoration: none;
+}
+
+/* Map style */
+#map { 
+ height: 400px;
+ width: 899px;
 }
