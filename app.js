@@ -7,6 +7,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express (); // using exprss as app
 
+const Listing = require("./models/listing.js")
+
 // requiring - mongoose
 const mongoose = require("mongoose");
 
@@ -100,17 +102,9 @@ app.use((req, res, next) =>{
     next();
 });
 
-
-// demoUser - Creation
-// app.get("/demouser", async(req, res)=>{
-//     let fakeUser = new User({
-//         email: "Kam123@gmail.com",
-//         username: "ks6600",
-//     });
-//     let registeredUser = await User.register(fakeUser, "helloworld");
-//     res.send(registeredUser);
-// });
-
+app.get("/" ,async (req, res) =>{
+    const allListings = await Listing.find({});
+    res.render("Listing/index.ejs", {allListings} );});
 // importing listing route
 app.use("/Listing",listingRouter);
 
