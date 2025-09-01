@@ -1,4 +1,4 @@
-# Node modules
+# Node modules (do not push to GitHub)
 node_modules/
 
 # Logs
@@ -9,14 +9,21 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Dependency directories
+jspm_packages/
+
 # Runtime data
 pids
 *.pid
 *.seed
 *.pid.lock
 
-# Dependency directories
-jspm_packages/
+# dotenv environment variables (never push secrets!)
+.env
+.env.local
+.env.development.local
+.env.test
+.env.production.local
 
 # Optional npm cache directory
 .npm
@@ -24,22 +31,15 @@ jspm_packages/
 # Optional eslint cache
 .eslintcache
 
-# dotenv environment variables file
-.env
-.env.test
-.env.local
-.env.development.local
-.env.production.local
-
-# Mac system files
-.DS_Store
-
-# VS Code settings
-.vscode/
-
-# Coverage directory used by testing frameworks
+# Coverage directory (testing)
 coverage/
 
 # Build output
 dist/
 build/
+
+# OS / IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
