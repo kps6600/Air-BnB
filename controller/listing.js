@@ -6,8 +6,7 @@ const geocodingClient = mbxGeocoding({ accessToken: mapToken});
 
 // exporting listing modules
 const Listing = require("../models/listing");
-const { log } = require("console");
-
+ 
 // index route (Render show all Listings)
 module.exports.index =  async (req, res) =>{ 
     const allListings = await Listing.find({});
@@ -15,19 +14,18 @@ module.exports.index =  async (req, res) =>{
 };  
 
 // Render new listing From
-module.exports.renderNewListingForm = (req, res) =>{
-    res.render("Listing/new.ejs")
+module.exports.renderNewListingForm = async (req, res) =>{
+    const categories =  Listing.schema.path("category").enumValues;
+    res.render("Listing/new.ejs", {categories}); 
 };
 
 // post new listing
 module.exports.postNewListing = async (req, res, next) => {
     let response = await geocodingClient.forwardGeocode({
-    query: 'New Delhi, India',
+    query: req.body.listing.location,
     limit: 2
   })
    .send();
-    console.log(response);
-    res.send("done!");v 
     
     // console.log(req.body);  
     let url = req.file.path; 
@@ -36,9 +34,11 @@ module.exports.postNewListing = async (req, res, next) => {
     const newlisting = new Listing( req.body.listing);
     newlisting.image = {url, filename};
     newlisting.owner = req.user._id;
+    // storing geometry in listing
+    newlisting.geometry = response.body.features[0].geometry;
     let savedData = await newlisting.save();
+    console.log(savedData);
     req.flash("success" ," New Listing Created!");
-    // console.log(savedData);
     res.redirect("/Listing");
 };
 
@@ -47,11 +47,14 @@ module.exports.postNewListing = async (req, res, next) => {
 module.exports.showListing = async (req, res) =>{
     let {id} = req.params;
     let listing = await Listing.findById(id).populate({path:"reviews", populate:{path: "author"}}).populate("owner");
+    let coordinates = listing.geometry.coordinates;
+    console.log(coordinates);
+    
     if(!listing){
         req.flash("error" ," Listing Does Not Exits!");
         res.redirect("/Listing");
     };
-    res.render("Listing/show.ejs", {listing});
+    res.render("Listing/show.ejs", {listing, coordinates});
 };
 
 // render edit form

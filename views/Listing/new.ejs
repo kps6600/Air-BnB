@@ -32,6 +32,16 @@
                 <input type="text" name="listing[country]" placeholder="enter country" class="form-control" required />
                 <div class="invalid-feedback">Country name should be valid</div>
             </div>
+           <div class="mb-3">
+                <label for="category" class="form-label">Chosse your  home category</label>
+                <select name="listing[category]" id="category">
+                    <option value="">Choose the category</option>
+                    <% for(let ct of categories) { %>
+                        <option value="<%= ct %>"><%= ct %></option>
+                    <% } %>
+                    required
+                </select>
+              </div>
             <br /><br />
             <button class="btn btn-dark">Add</button>
         </form>

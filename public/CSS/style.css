@@ -8,12 +8,10 @@
     flex: 1;
 }
 
-body{
-    font-family: "Plush Jakarta Sans", sans-serif;
-    height: 100%;
-    
-}
-
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f8f9fa;
+    }
 .fa-compass{
     color: #fe525d;
     font-size: 2rem;
@@ -28,6 +26,9 @@ body{
 .nav-link{
     color: #222222;
     
+}
+#navbarNavAltMarkup{
+    width: 3rem;
 }
 
 /* Footer */

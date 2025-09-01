@@ -37,10 +37,10 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
  
-
-let MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+// let MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust
+const atlasDbUrl = process.env.ATLASDB_URL;
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(atlasDbUrl);
 };
 
 main().then(() =>{
@@ -71,13 +71,7 @@ const sessionOptions = {
     httpOnly: true,
    },
 };
-
-// initialization of Route
-app.get("/", (req, res) =>{
-    res.send("kam");
-});
-
-
+ 
 //1st we need to use  session with theri sessions option variables to initialized the passport
 app.use(session(sessionOptions)); 
 
